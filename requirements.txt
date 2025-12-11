@@ -1,0 +1,13 @@
+opencv-python-headless
+mediapipe
+requests
+pillow
+openai
+# depthai  # Causes crash on macOS if OAK-D not present
+numpy<2.0
+PyQt6
+pyaudio
+vosk
+SpeechRecognition
+pyttsx3
+google-generativeai

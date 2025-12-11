@@ -1,0 +1,24 @@
+REQUIREMENTS = """# Smart Mirror Python Dependencies"""
+
+# Core
+requests==2.31.0
+pillow==10.0.0
+
+# AI
+anthropic==0.18.0
+
+# Computer Vision
+opencv-python==4.8.0.74
+mediapipe==0.10.3
+depthai==2.23.0.0
+
+# GUI (usually pre-installed on Raspberry Pi OS)
+# python3-tk (install via apt)
+
+# Optional
+numpy==1.24.3
+"""
+
+# Save requirements
+# with open('requirements.txt', 'w') as f:
+#     f.write(REQUIREMENTS)"""
