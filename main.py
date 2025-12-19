@@ -47,7 +47,7 @@ class SmartMirror(QObject):
         self.ai_assistant = AIAssistant(self.config)
         
         # Initialize Command Processor / Command Processor shuru karein
-        self.command_processor = CommandProcessor(self.config, self.ai_assistant)
+        self.command_processor = CommandProcessor(self.config, self.ai_assistant, self.weather_service)
         self.command_processor.response_signal.connect(self.on_command_response)
         self.command_processor.action_signal.connect(self.on_command_action)
         

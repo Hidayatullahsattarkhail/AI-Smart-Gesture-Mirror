@@ -8,10 +8,11 @@ class CommandProcessor(QObject):
     response_signal = pyqtSignal(str, str) # (User Text, Assistant Text)
     action_signal = pyqtSignal(str, object) # (Action Name, Data)
 
-    def __init__(self, config, ai_assistant=None):
+    def __init__(self, config, ai_assistant=None, weather_service=None):
         super().__init__()
         self.config = config
         self.ai_assistant = ai_assistant
+        self.weather_service = weather_service
         
     def process(self, text):
         """Process user text and determine action / User ki baat samajhna"""
@@ -39,7 +40,25 @@ class CommandProcessor(QObject):
         # 3. Weather / Mausam
         if 'weather' in text or 'temperature' in text:
             self.action_signal.emit('show_weather', None)
-            self._respond(text, "Checking the weather for you...", "Checking Weather...")
+            
+            # Get actual weather data / Asli mausam ka data lein
+            if self.weather_service:
+                weather_data = self.weather_service.get_current_weather()
+                temp = weather_data.get('temp', '--')
+                condition = weather_data.get('condition', 'Unknown')
+                city = weather_data.get('city', 'your location')
+                
+                # Format natural response / Qudrati jawab banaein
+                if temp != '--':
+                    speech_text = f"The current temperature in {city} is {temp} degrees with {condition}"
+                    display_text = f"{city}: {temp}°, {condition}"
+                else:
+                    speech_text = f"Weather information is currently unavailable. {condition}"
+                    display_text = f"Weather: {condition}"
+                
+                self._respond(text, speech_text, display_text)
+            else:
+                self._respond(text, "Checking the weather for you...", "Checking Weather...")
             return
 
         # 4. Website Commands / Websites kholna

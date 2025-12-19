@@ -195,7 +195,7 @@ class VoiceController:
             if not command:
                 # Wake word ONLY -> Enter conversation mode
                 print("DEBUG: Standalone wake word. Asking for input.")
-                self.speak("Yes, what can I help you?")
+                self.speak("What can I help you?")
                 self.waiting_for_command = True
                 return
 
